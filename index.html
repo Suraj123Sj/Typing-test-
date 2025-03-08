@@ -154,6 +154,50 @@ header {
 }
 
 
+/* Tool Suggestions Section */
+.tool-suggestions {
+    background: white;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.tool-suggestions h2 {
+    font-size: 2rem;
+    color: #4a90e2;
+    margin-bottom: 1.5rem;
+}
+
+.tools {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.tool-card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+}
+
+.tool-card h3 {
+    font-size: 1.5rem;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.tool-card p {
+    font-size: 1rem;
+    color: #666;
+}
 
         /* Footer */
         footer {
@@ -241,7 +285,7 @@ header {
     <nav class="nav-container">
         <a href="#" class="logo">
             <img src="logo.png" alt="ToolMaster Logo" class="logo-img">
-            ToolMaster
+            𝕀 ❤️ 𝕊𝕥𝕦𝕕𝕪
         </a>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
@@ -273,6 +317,24 @@ header {
   <p>Time Taken: <span id="time-taken">0s</span></p>
 </div>
 
+    </section>
+    <!-- Tool Suggestions Section -->
+    <section class="tool-suggestions">
+        <h2>Other Useful Tools</h2>
+        <div class="tools">
+            <div class="tool-card">
+                <h3>Grammar Checker</h3>
+                <p>Improve your grammar and sentence structure.</p>
+            </div>
+            <div class="tool-card">
+                <h3>Plagiarism Checker</h3>
+                <p>Ensure your content is original and unique.</p>
+            </div>
+            <div class="tool-card">
+                <h3>Word Counter</h3>
+                <p>Count words, characters, and sentences in your text.</p>
+            </div>
+        </div>
     </section>
 
         <!-- About Section -->
