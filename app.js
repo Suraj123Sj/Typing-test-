@@ -6,40 +6,71 @@ const installBtn = document.getElementById('installBtn');
 // Load notes from localStorage
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-// PWA Installation
+// ========== PWA Installation Logic ==========
 let deferredPrompt;
+
+// Check if PWA is already installed
+const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
+if (isInstalled) {
+    installBtn.style.display = 'none';
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            installBtn.style.display = 'none';
-        }
-        deferredPrompt = null;
+    
+    // Only show install button if not in standalone mode
+    if (!isInstalled) {
+        installBtn.style.display = 'block';
     }
 });
 
-// Service Worker Registration
+installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+            console.log('User accepted install');
+            installBtn.style.display = 'none';
+        }
+    } catch (err) {
+        console.error('Installation failed:', err);
+    }
+    
+    deferredPrompt = null;
+});
+
+// Detect successful installation
+window.addEventListener('appinstalled', () => {
+    console.log('PWA installed successfully');
+    installBtn.style.display = 'none';
+    deferredPrompt = null;
+});
+
+// ========== Service Worker Registration ==========
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
             .then(registration => {
-                console.log('SW registered:', registration);
+                console.log('SW registered with scope:', registration.scope);
+                
+                // Check for updates periodically
+                setInterval(() => {
+                    registration.update().then(() => {
+                        console.log('Checking for service worker updates');
+                    });
+                }, 60 * 60 * 1000); // Check every hour
             })
             .catch(error => {
-                console.log('SW registration failed:', error);
+                console.error('SW registration failed:', error);
             });
     });
 }
 
-// Note functionality
+// ========== Note Functionality ==========
 function saveNote() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
