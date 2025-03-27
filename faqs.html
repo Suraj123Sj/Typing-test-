@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+
+    <div class="faq-container">
+    <h2>❓ Frequently Asked Questions (FAQ)</h2>
+    <p>❓ FAQs – Keyboard Testing Tool  
+  
+ 1. This Typing Test Tool, what on earth is it?  
+ Free online, our typing Testing Tool lets people measure their typing speed and accuracy. You can work, increase your WPM (Words per Minute), and get better mastery of your keyboard.  
+  
+  
+ 2. Have I to make an account?  
+ Our typing test is entirely complimentary and demands no signup. You are able to start typing right away!  
+  
+  
+ 3. Is my information private?  
+ Absolutely not! Not any of your personal information is kept or distributed. Your typing practices are not logged or stored.  
+  
+  
+ 4. Could I employ this tool on mobile devices?  
+ Absolutely! With tablets and smartphones, our website works flawlessly on any device.  
+  
+  
+ 5. Does the typing test free from cost?  
+ Indeed! All of our typing testing tools are absolutely free of cost with no additional fees.  
+  
+  
+ 6. Factual exactitude of typing speed test?  
+ Our tool offers real-time WPM and accuracy tracking and is meant for exceptional precision. Still, outside elements such internet speed might have a small influence on outcomes.  
+  
+  
+ 7. Are my typed data retained by you?  
+ We do not retain any sort of typing data. Your test results are shown live, but they are not retained once you exit the website.  
+  
+  
+ 8. Structures or changes could I propose?  
+ Certainly! We appreciate criticism. Email us at [ Your Contact Email] with your ideas.  
+  
+  
+ 9. Can several languages be supported by you?  
+ Absolutely; we are always including more choices and our typing test covers several languages.  
+  
+  
+ 10. I Contact support?  
+ Reach us by email at bipulbarman8099@gmail.com  or stop by our Contact Us page.  
+ 
+.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <style>
+        /* Default Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* FAQ Container */
+.faq-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards;
+}
+
+/* FAQ Item */
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: left;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    background: #0056b3;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    text-align: left;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+.dark-mode .faq-container {
+    background: #1e1e1e;
+}
+
+.dark-mode .faq-question {
+    background: #0056b3;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 8px 15px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#darkModeToggle:hover {
+    background: #0056b3;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+    <script>
+        // Dark Mode Toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
+
+// FAQ Accordion
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('span');
+
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+            icon.textContent = "+";
+        } else {
+            answer.style.display = "block";
+            icon.textContent = "-";
+        }
+    });
+});
+    </script>
+</body>
+</html>
