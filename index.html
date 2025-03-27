@@ -3,56 +3,900 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- PWA Essential Meta Tags -->
-    <meta name="theme-color" content="#4a90e2">
-    <meta name="description" content="A colorful Progressive Web App for taking notes">
-    
-    <!-- Manifest Configuration -->
-    <link rel="manifest" href="./manifest.json">
-    
-    <!-- iOS/Safari Specific Config -->
-    <link rel="apple-touch-icon" href="https://i.ibb.co/hxNQddXK/d980ba5fdc35.webp">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- PWA Assets Preload -->
-    <link rel="stylesheet" href="styles.css" crossorigin="anonymous">
-    <link rel="preload" href="app.js" as="script">
-    
-    <title>Colorful Notes PWA</title>
+    <meta name="description" content="Improve your typing speed and accuracy with our free online typing test tool. Practice with real-time speed tracking, accuracy reports, and customizable tests. Start typing faster today!">
+    <meta name="keywords" content="Free typing test, Online typing test, Typing speed test, Typing test for beginners, Typing test online free, Fast typing test, Best typing test website, Improve typing speed, Keyboard typing test, Typing accuracy test, How to improve typing speed online, Typing test with timer, 10-minute typing test, Typing test for kids, Typing test with words per minute, Typing test without login, Typing speed test with accuracy, Online typing practice free, Typing test for professionals, Advanced typing test, Best free typing test website, Typing test with different languages, Online typing speed challenge, Improve typing accuracy online, Words per minute typing test, Typing test with instant results, Real-time typing test online, Speed typing competition, Typing practice test for exams, Touch typing speed test, Typing test for job preparation, Online typing test for students, Typing test with paragraph mode, Typing test for data entry jobs, Beginner-friendly typing test, Mobile-friendly typing test website, Typing test with fun exercises, Type faster with online typing test, Best WPM test online, Typing test without ads, What is my typing speed?, How to take a typing speed test?, Can I improve my typing skills online?, Where to find the best typing test website?, What is the best free typing practice website?, How many words per minute should I type?, How accurate should my typing be?, How can I type faster without errors?, How to pass a professional typing test?, What is the average typing speed for adults?">
+    <title>Typing speed test</title>
+    <link rel="icon" href="https://i.ibb.co/DPB6rYbk/81aef748c7c0.png" type="image/png">
+    <meta property="og:image" content="https://i.ibb.co/DPB6rYbk/81aef748c7c0.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:image" content="https://i.ibb.co/DPB6rYbk/81aef748c7c0.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #E1E4D5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        #results {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+#results p {
+  margin: 0;
+  padding: 10px;
+  background: #f5f7fa;
+  border-radius: 5px;
+}
+
+#results span {
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+
+/* Header Navigation */
+header {
+    background: #E1E4D5;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position:relative ;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    font-size: clamp(1.5rem, 1.5rem + 1vw, 2rem); /* Larger maximum size */
+    color: #8FB327;
+    font-weight: 900; /* Maximum boldness (if font supports it) */
+    text-decoration: none;
+    transition: font-size 0.3s ease;
+    line-height: 1; /* Ensure tight spacing with bold text */
+}
+
+/* Optional: Add text stroke for extra boldness */
+.logo-text {
+    text-shadow: 0.5px 0 0 currentColor;
+}
+
+/* If using an image/icon in logo */
+.logo img {
+    height: 1.5em; /* Larger icon relative to text */
+    width: auto;
+}
+
+/* Adjust based on your logo size */
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #8FB327;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+
+/* Typing Test Section */
+#typing-test {
+  text-align: center;
+  padding: 50px 0;
+}
+
+#sample-text {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#user-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#start-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#start-btn:hover {
+  background: #357abd;
+}
+
+#results {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+
+
+.tools {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.tool-card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+}
+
+.tool-card h3 {
+    font-size: 1.5rem;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.tool-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+        /* Footer */
+        footer {
+            background: transparent;
+            color: black;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #8FB327;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #8FB327;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 2rem;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="app-header">
-            <h1>📝 Color Notes</h1>
-            <button id="installBtn" class="btn install-btn" aria-label="Install application">
-                Install App
-            </button>
-        </header>
+<!-- Header Navigation -->
+<header>
+    <nav class="nav-container">
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/DPB6rYbk/81aef748c7c0.png" alt="ToolMaster Logo" class="logo-img">
+            𝕀 ❤️ 𝕊𝕥𝕦𝕕𝕪
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="faqs.html">Faqs</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="menu-toggle">☰</button>
+    </nav>
+</header>
 
-        <form id="noteForm" class="note-form" aria-labelledby="noteHeading">
-            <h2 id="noteHeading" class="sr-only">Create New Note</h2>
-            <textarea 
-                id="noteInput" 
-                class="note-input" 
-                placeholder="Start typing your note..." 
-                required
-                aria-label="Note input field"
-            ></textarea>
-            <button type="submit" class="btn add-btn" aria-label="Add note">
-                Add Note
-            </button>
-        </form>
 
-        <div id="notesContainer" class="notes-container" role="region" aria-live="polite"></div>
-    </div>
 
-    <!-- Progressive Enhancement -->
-    <noscript>
-        <div class="error-banner">
-            JavaScript is required to use this application. Please enable JavaScript to continue.
+    <!-- Main Content -->
+    <main>
+    <section id="typing-test">
+      <div class="container">
+        <h2>Test Your Typing Speed</h2>
+        <p>Type the following text as fast and accurately as you can:</p>
+        <div id="sample-text">
+          The quick brown fox jumps over the lazy dog.
         </div>
-    </noscript>
+        <textarea id="user-input" placeholder="Start typing here..." rows="4"></textarea>
+        <button id="start-btn">Start Test</button>
+        <div id="results">
+  <p>Words Per Minute (WPM): <span id="wpm">0</span></p>
+  <p>Accuracy: <span id="accuracy">0%</span></p>
+  <p>Errors: <span id="errors">0</span></p>
+  <p>Time Taken: <span id="time-taken">0s</span></p>
+</div>
 
-    <script src="app.js" defer></script>
+        <!-- About Section -->
+        <section class="section" >
+            <div class="container">
+                <h2 class="section-title">About our tools</h2>
+                <p> Everything You Need to Know; Website of Typing Test Tool  
+  
+ Introduction:   
+  
+  A typing test tool found online on a website lets users check both speed and precision. Those looking to improve their typing skills— be they laymen, students, or professionals—typically discover it natural application. These systems' users can keep track over time, analyze their results against others, and assess their typing prowess.  
+  
+ Typing test sites usually help typical users as well as those preparing for professional typing tests by providing several methods such timed exams, custom texts, and real-world exercises. Moreover enhancing typing capability, several of these systems include interactive lessons and games.  
+  
+ In this post, we will discuss the features, benefits, types, and relevance of a website tool for typing test. Furthermore we will discuss here its role in improving productivity and best way you could use it.  
+  
+  
+  
+  
+ Traits of a website meant for a typing test tool  
+  
+ The website of a decent typing test tool provides many user interface and learning enhancement tools. among the most important things  
+  
+ 1. number of words typed and accuracy assessment  
+  
+ Measures per minute for keystrokes (KPM) as well as words.  
+  
+  Keeps track of typo numbers as well as accuracy percentage.  
+  
+ presents real-time data on speed and errors.  
+  
+  
+ 2. Many testing modes  
+  
+ Users might select a few increments of time: 1, 2, 5 or 10 minutes.  
+  
+ One might pen their own work or type out some specific passages.  
+  
+  The system generates arbitrary terms to analyze typing reflex.  
+  
+ Copy well-known quotations or book excerpts for a realistic experience.  
+  
+  
+ 3. Gathering of data and monitoring of development  
+  
+ Keeps user performance data in support of monitoring development.  
+  
+ employs charts and figures to provide visual data analysis.  
+  
+ Consumers can compare their present performance with their past results.  
+  
+  
+ 4. Availability of Multilanguage Assistance  
+  
+ English, Spanish, Hindi, Bengali, and several other languages have typing tests quite different from English.  
+  
+ encourages multilingual people to type in their chosen language.  
+  
+  
+ 5. Typing Exercises and Lessons by Hand  
+  
+ instructions in typing for beginners up to professionals level  
+  
+ controlled drills to improve finger alignment and speed.  
+  
+ entertaining learning interactive games.  
+  
+  
+ keyboards configurations.  
+  
+ Among a number of other keyboard configurations, supports QWERTY, AZERTY, Dvorak, and Colemak  
+  
+ regional preferences particular custom keyboard configurations.  
+  
+  
+ 7. responsive design that is mobile-friendly.  
+  
+ Operates rather smoothly on tablets, cellphones, and desktops.  
+  
+ Provides a consistent user interface on several screen sizes.  
+  
+  
+ 8. Then dark mode and custom themes  
+  
+ Dark mode lets users choose for better visibility of text.  
+  
+  Offers customized themes that give every user a unique experience.  
+  
+  
+  
+  
+  
+  Benefits of using a typing test tool website   
+  
+  Among the benefits of online typing test tools are improved skills, greater efficiency, and more job opportunities.  
+  
+ 1. Faster Typing Speeds and Improved Accuracy  
+  
+  Those who sometimes use a typing test tool improve their accuracy while honing their speed. Faster typing improves productivity by reducing the amount of time spent on typing-associated tasks.  
+  
+ 2. Increases Efficiency  
+  
+  Faster completion of typing-related work lets professionals as well as students focus more on more important tasks. Improved typing accuracy leads to better handling of work results.  
+  
+ 3. Guides you for employment.  
+  
+ Several occupations asking fast and accurate typing are data entry, transcription, and administrative work. A typing test tool helps users get ready for technical work demands.  
+  
+ 4. Prepares one for Competitive Tests.  
+  
+  Goverment assessments and typing-based skill tests sometimes specify a minimum speed. Candidates could meet the required WPM by practicing on a typing speed website.  
+  
+ 5. eases tiredness from typing.  
+  
+ Through Herods' muscle memory training and proper finger placement, a typing test tool helps to lower hand and wrist strain, thereby preventing weariness and harm.  
+  
+ Raises Certainty  
+  
+ User's growing conviction in their capacity to handle typing-related tasks, whether for personal or professional use, derives from their improved accuracy and pace in typing.  
+  
+  
+  
+  
+ different types of typing tests websites  
+  
+ Different kinds of typing test sites meet varied user needs.  
+  
+ 1. Normal Websites for Typing Checkaris   
+  
+ These systems highlight assessment of typing accuracy and speed using simple tools like WPM analysis and mistake monitoring.  
+  
+ 2.  
+  
+ For learners and beginners, these websites offer step-by-typing instructions, finger positioning manuals, and interactive exercises.  
+  
+ 3. websites covering typographical games  
+  
+ These websites mix games and typing difficulties to make learning more engaging. Usually, their multiplayer capabilities let users fight against one another.  
+  
+  4. Relevant Typing Exam Websites  
+  
+  Companies and recruiters use these to evaluate job candidates&amp;' typing ability.  For employment uses, they may offer certification alternatives.  
+  
+  5. Programs for Multilingual Typing Test  
+  
+ Through encouraging typing tests in several languages, they empower people to either polish their first language or learn to type in a new one.  
+  
+  
+  
+  
+ Efficiently using a typing examination gadget  
+  
+ Maximize a typing test tool website by following these instructions:   
+  
+ 1. Choose the Suitable Testing Approach  
+  
+ First timers should first start on simple lessons.  
+  
+ More skilled users may exercise with arbitrary words and longer paragraphs.  
+  
+  
+ 2. Appearances has to be maintained suitable.  
+  
+ Both feet on the ground should be straight.  
+  
+ Straighten wrists; unwind fingers.  
+  
+  
+  3.	Run Accuracy Top Priority Above Tempo  
+  
+ Eliminate preventable typing mistakes.  
+  
+ Speed would inherently increase once accuracy does.  
+  
+  
+ 4. Maintain Regularly    
+  
+ Set aside fifteen minutes daily to practice typing.  
+  
+ Track development, set goals for enhancement.  
+  
+  
+ 5. One's fingers have to be correctly placed.  
+  
+ Check the home row technique: (ASDF-JKL;).  
+  
+ Ignore looking at the keyboard if you type.  
+  
+  
+ 6. Try different keyboard configurations.  
+  
+ If you already know QWERTY, experiment with other designs like Dvorak for efficiency.  
+  
+  
+ 7. Breaks help you to battle exhaustion.  
+  
+ Rest your hands and let your fingers take a break after extended typing sessions.  
+  
+ Avoid discomfort by ensuring your palms are appropriately located.  
+  
+  
+  
+  
+  
+ Using a typing test tool bus boosts productivity.  
+  
+ Several businesses depend very much on fast, accurate typing. One can utilize a typing test tool in this manner:   
+  
+ 1. Errors writers and students commit  
+  
+ Project completion and student study solutions can be accelerated by deadlines.  
+  
+ Helps authors and bloggers create articles more speedily.   
+  
+  
+ 2. Busy Office Working Professionals  
+  
+ Compiling reports and correspondence consume less time.  
+  
+ Streamlines data entry and documentation chores.  
+  
+  
+ 3.   
+  
+ Raising coding speed helps to improve programming efficiency.  
+  
+ Less mistakes related to challenging sentence structure when penning.  
+  
+  
+   Iextracomment 4.  
+  
+ Offers transcription tasks with great spelling precision.  
+  
+  Data input professionals effectively help to meet job criteria.  
+  
+  
+  5. For freelancers as well as remote employees and independent contractors  
+  
+  Faster typing translates into better productivity and more work completed.  
+  
+ Practically let's freelancers work over several projects.  
+  
+  
+  
+  
+  
+ Last among other things,  
+  
+ Everyone who wish to improve their typing speed and accuracy should look at a website on typing test tools. Whether you are a student, expert, or job seeker, mastery of typing techniques improves access to new employment opportunities and increases output.  
+  
+ Daily use of a typing test website helps you track your progress, define objectives of improvement, and boost your performance in typing-related activities. Choose a reliable typing exam solution that offers difficult exercises, live reporting, and interactive learning to help make your practice sessions better.  
+ 
+
+
+
+
+
+
+
+*Study Tools: Your Free, AI-Powered Academic Suite for Smarter Learning**  
+
+Elevate your academic journey with **Study Tools**, the ultimate free platform designed to empower students, researchers, and educators worldwide! 🚀 Our **SEO-optimized** website offers a comprehensive suite of AI-driven tools that streamline learning, boost productivity, and ensure top-tier accuracy for all your academic needs.  
+
+**Why Choose Study Tools?**  
+✅ **100% Free & Accessible**: Enjoy unlimited access to premium tools without hidden costs or sign-up barriers.  
+✅ **AI-Powered Precision**: From detecting plagiarism in essays with our advanced **plagiarism checker** to solving complex equations via the **AI math solver**, get reliable results in seconds.  
+✅ **Seamless Citation & Formatting**: Generate flawless APA, MLA, or Chicago-style citations instantly with our **citation generator**, saving hours of manual work.  
+✅ **Smart Rewriting**: Refine content effortlessly with the **paraphrasing tool**, ensuring originality and clarity in every assignment.  
+✅ **Multi-Device Compatibility**: Study on-the-go with our mobile-friendly design, optimized for smartphones, tablets, and desktops.  
+
+**Boost Grades, Save Time**  
+Whether you’re tackling homework, research papers, or exam prep, Study Tools helps you:  
+- **Avoid plagiarism** with real-time content scanning.  
+- **Solve math problems** with step-by-step solutions.  
+- **Convert units** or currencies in a click.  
+- **Organize study schedules** with intuitive planners.  
+
+**Trusted by millions** across 150+ countries, our platform combines cutting-edge AI with user-friendly design, making it a top choice for **SEO-driven academic support**. Perfect for high schoolers, university students, and professionals, Study Tools ensures your work is polished, original, and deadline-ready.  
+
+**Explore Study Tools today** – where innovation meets education, and academic success is just a click away! 🌍📚 **Start learning smarter, not harder!**  
+
+---  
+**SEO Keywords**: Free study tools, plagiarism checker online, AI math solver, citation generator APA, paraphrasing tool free, academic productivity tools, homework help, student resources, SEO-optimized learning,Keywords research:
+student tools princeton review 
+student tools cgce 
+student tools uvic 
+student tools temple 
+student tools ford 
+student tools for educational 
+pathways 
+student tools phoenix college 
+student tools piqua
+
+online student tools princeton,
+review sat, 
+princeton student reviews, 
+princeton student tools,
+student tools princeton review, 
+princeton review online student 
+tools, 
+princeton review online tools ,
+princeton review online sat prep,
+what is the best online sat prep 
+course, 
+what is the best online sat prep 
+free, 
+what is the best sat prep book, 
+is khan academy sat prep good ,
+best sat online coaching ,
+sat online preparation,
+student resources cgcc ,
+ 
+
+student.tcglobal.com ,
+student corner cgpit,
+uvic student fees ,
+what gpa do you need for uvic ,
+uvic fees for international ,
+students ,
+uvic tools ,
+uvic tols,
+temple tools ,
+student temple academy ,
+student tools ,
+educational temple,
+student tools ,
+studds toolbox,
+what to bring to student 
+teaching ,
+what is an educational pathway ,
+what do you need for student 
+teaching ,
+educational tools for students ,
+student tools ,
+education tool ,
+educational tools for teachers,
+student tools piqua.org ,
+students pick ,
+student tools,
+student ai tools ,
+student assessment tools ,
+student engagement tools ,
+student discount tools ,
+student online tools ,
+student discount pro tools ,
+student pro tools,
+law student ai tools ,
+student learning ai tools ,
+medical student ai tool ,
+ai tools student discount ,
+tools required for artificial 
+intelligence ,
+examples of ai tools ,
+tools used in artificial 
+intelligence ,
+ai tools list ,
+how can ai be used in schools ,
+best ai tools for students free,
+student tools and resources ,
+student tools averett ,
+student tools sat ,
+student tools landmark college ,
+student tools d230,
+
+,
+ 
+
+student.tcglobal.com ,
+student corner cgpit,
+uvic student fees ,
+what gpa do you need for uvic ,
+uvic fees for international ,
+students ,
+uvic tools ,
+uvic tols,
+temple tools ,
+student temple academy ,
+student tools ,
+educational temple,
+student tools ,
+studds toolbox,
+what to bring to student 
+teaching ,
+what is an educational pathway ,
+what do you need for student 
+teaching ,
+educational tools for students ,
+student tools ,
+education tool ,
+educational tools for teachers,
+student tools piqua.org ,
+students pick ,
+student tools,
+student ai tools ,
+student assessment tools ,
+student engagement tools ,
+student discount tools ,
+student online tools ,
+student discount pro tools ,
+student pro tools,
+law student ai tools ,
+student learning ai tools ,
+medical student ai tool ,
+ai tools student discount ,
+tools required for artificial 
+intelligence ,
+examples of ai tools ,
+tools used in artificial 
+intelligence ,
+ai tools list ,
+how can ai be used in schools ,
+best ai tools for students free,
+student tools and resources ,
+student tools averett ,
+student tools sat ,
+student tools landmark college ,
+student tools d230,.  
+
+**Meta Description**: Supercharge your studies with Study Tools’ free AI-powered suite: plagiarism checker, citation generator, math solver, paraphrasing tool & more! Trusted by students globally for accuracy & easey.</p>
+            </div>
+        </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <p>Have questions, feedback, or suggestions? We'd love to hear from you! 💡 📧 Email: surajraju9999@gmail.com Support & Assistance 🛠️ Need help with a tool? Contact us via email. 📩 Found a bug? 🐞 Let us know, and we’ll fix it ASAP! Want a new feature? 💡 We welcome your suggestions. We aim to respond within 24-48 hours. Thank you for using Student Online Tools! 🚀</p>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">© 2023 ToolMaster. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+// Mobile Menu Toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Smooth Scroll (fixed syntax)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Typing Test Code
+    const sentences = [
+        "The quick brown fox jumps over the lazy dog.",
+        "Programming is the art of telling another human what one wants the computer to do.",
+        "Practice makes perfect, especially when it comes to typing.",
+        "Coding is fun and challenging at the same time.",
+        "JavaScript is the language of the web.",
+        "Keep calm and keep typing to improve your speed.",
+        "The early bird catches the worm, so start practicing early.",
+        "Learning to code opens up a world of opportunities.",
+        "Consistency is the key to mastering any skill.",
+        "Type with focus and accuracy to achieve your goals."
+    ];
+
+    const sampleText = document.getElementById("sample-text");
+    const userInput = document.getElementById("user-input");
+    const startBtn = document.getElementById("start-btn");
+    const wpmDisplay = document.getElementById("wpm");
+    const accuracyDisplay = document.getElementById("accuracy");
+    const errorsDisplay = document.getElementById("errors");
+    const timeDisplay = document.getElementById("time-taken");
+
+    let startTime, endTime, timerInterval;
+
+    startBtn.addEventListener("click", () => {
+        if (startBtn.innerText === "Start Test") {
+            resetTest();
+            userInput.disabled = false;
+            userInput.focus();
+            startBtn.innerText = "End Test";
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+            selectRandomSentence();
+        } else {
+            endTest();
+        }
+    });
+
+    userInput.addEventListener("input", () => {
+        if (!startTime) {
+            startTime = new Date();
+            startBtn.innerText = "End Test";
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+    });
+
+    function resetTest() {
+        userInput.value = "";
+        userInput.disabled = true;
+        startTime = null;
+        wpmDisplay.innerText = "0";
+        accuracyDisplay.innerText = "0%";
+        errorsDisplay.innerText = "0";
+        timeDisplay.innerText = "0s";
+        clearInterval(timerInterval);
+        selectRandomSentence();
+    }
+
+    function endTest() {
+        endTime = new Date();
+        userInput.disabled = true;
+        startBtn.innerText = "Start Test";
+        clearInterval(timerInterval);
+        calculateResults();
+    }
+
+    function calculateResults() {
+        const userText = userInput.value;
+        const timeTaken = (endTime - startTime) / 1000;
+        const charCount = userText.length;
+        const wpm = Math.round((charCount / 5) / (timeTaken / 60));
+        const { accuracy, errors } = calculateAccuracy(userText);
+
+        wpmDisplay.innerText = wpm;
+        accuracyDisplay.innerText = `${accuracy}%`;
+        errorsDisplay.innerText = errors;
+        timeDisplay.innerText = `${timeTaken.toFixed(1)}s`;
+    }
+
+    function calculateAccuracy(userText) {
+        const sample = sampleText.innerText;
+        let correctChars = 0;
+        let errors = 0;
+        const maxLength = Math.max(userText.length, sample.length);
+
+        for (let i = 0; i < maxLength; i++) {
+            const sampleChar = sample[i] || '';
+            const userChar = userText[i] || '';
+            
+            if (sampleChar === userChar) {
+                correctChars++;
+            } else {
+                errors++;
+            }
+        }
+
+        const accuracy = ((correctChars / sample.length) * 100).toFixed(2);
+        return { accuracy, errors };
+    }
+
+    function updateTimer() {
+        const currentTime = new Date();
+        const timeTaken = (currentTime - startTime) / 1000;
+        timeDisplay.innerText = `${timeTaken.toFixed(1)}s`;
+    }
+
+    function selectRandomSentence() {
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        sampleText.innerText = sentences[randomIndex];
+    }
+    </script>
 </body>
 </html>
