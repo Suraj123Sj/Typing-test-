@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://typingspeedtest-gamma.vercel.app/
-Mymap.xml
+Sitemap:Sitemap: https://typingspeedtest-gamma.vercel.app/sitemap.xml
